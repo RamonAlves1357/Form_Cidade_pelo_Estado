@@ -6,7 +6,7 @@ function populateUFs() {
         .then(states => {
 
             for (const state of states) {
-                ufSelect.innerHTML += `<option value="${state.id}" id="${state.nome}">${state.nome}</option>`
+                ufSelect.innerHTML += `<option value="${state.nome}" id="${state.id}">${state.nome}</option>`
             }
         })
 }
@@ -17,12 +17,14 @@ function getCities(event) {
     const citySelect = document.querySelector("[name=city]")
     const stateInput = document.querySelector("[name=uf]")
 
-    const ufValue = event.target.value
+
+    // const ufValue = event.target.value
 
     const indexOfSelectedState = event.target.selectedIndex
-        // stateInput.value = event.target.options[indexOfSelectedState].text
 
-    const url = `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${ufValue}/municipios`
+    const ufID = event.target.options[indexOfSelectedState].id
+
+    const url = `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${ufID}/municipios`
 
     citySelect.innerHTML = "<option value>Selecione a Cidade</option>"
     citySelect.disabled = true
